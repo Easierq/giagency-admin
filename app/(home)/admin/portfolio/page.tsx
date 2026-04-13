@@ -399,7 +399,7 @@ export default function CategoryProjectsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-green-50/50">
       <div className="container mx-auto px-[3%] lg:px-[7%] py-8">
         {/* Header */}
         <div className="flex flex-wrap gap-y-4 items-center justify-between mb-8">
@@ -528,7 +528,7 @@ export default function CategoryProjectsPage() {
                       <button
                         onClick={() =>
                           window.open(
-                            `https://ibetaagency.vercel.app/services/portfolio/${project.slug}`,
+                            `https://giagency.vercel.app/services/portfolio/${project.slug}`,
                             "_blank"
                           )
                         }

@@ -33,6 +33,10 @@ export async function fetchProjectBySlug(
   return apiGet(`/services/${category}/${slug}`);
 }
 
+export async function fetchPortfolioBySlug(slug: string) {
+  return apiGet(`/portfolio/${slug}`);
+}
+
 /**
  * Create new project
  */

@@ -50,3 +50,17 @@ export function parseProjectForForm(project: any) {
     colorPalette: project.colorPalette || [],
   };
 }
+
+export function parsePortfolioForForm(project: any) {
+  return {
+    ...project,
+    completionDate: project.completionDate
+      ? new Date(project.completionDate).toISOString().split("T")[0]
+      : "",
+    images: project.images || [],
+    techStack: project.techStack || [],
+    features: project.features || [],
+    tools: project.tools || [],
+    platforms: project.platforms || [],
+  };
+}

@@ -10,15 +10,10 @@ import {
 
 export default function AdminLandingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-green-50/50">
       {/* Hero Section */}
-      <section className="container mx-auto px-[3%] lg:px-[7%] py-20 text-center">
+      <section className="container mx-auto px-[3%] lg:px-[7%] py-20 pt-24 text-center">
         <div className="max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full mb-6">
-            <Shield className="w-4 h-4" />
-            <span className="text-sm font-semibold">Secure Admin Portal</span>
-          </div>
-
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
             Manage Your Portfolio
             <span className="text-green-600"> With Ease</span>

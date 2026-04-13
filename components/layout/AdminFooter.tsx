@@ -11,9 +11,7 @@ export default function AdminFooter() {
             href="/"
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
-            <span className="text-base font-bold text-slate-700">
-              iBETAAGENCY
-            </span>
+            <span className="text-base font-bold text-slate-700">GIAGENCY</span>
           </Link>
 
           <p className="text-sm text-slate-700">

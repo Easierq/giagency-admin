@@ -1,17 +1,17 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-export const Logo = ({ width = "w-[160px]" }) => {
+export const Logo = ({ width = "w-[100px]" }) => {
   return (
     <div className="">
       <Link href="/" className="inline-block">
         <img
-          src="/logo.png"
+          src="/logo.svg"
           alt="logo"
           className={cn("h-auto mb-[2px]", width)}
         />
       </Link>
-      <p className="text-green-600 text-sm">Admin Portal</p>
+      <p className="text-green-600 text-sm font-bold">Admin Portal</p>
     </div>
   );
 };
