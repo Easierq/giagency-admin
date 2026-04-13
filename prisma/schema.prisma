@@ -1,0 +1,306 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+enum ProjectStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+// ============================================
+// WEB DEVELOPMENT PROJECTS
+// ============================================
+
+model WebDevelopmentProject {
+  id          String @id @default(uuid()) @map("_id")
+  slug        String @unique
+  name        String
+  description String
+
+  // Basic Info (from slider items)
+  image    String // Main thumbnail image (for cards/sliders/detail page)
+  images   String[] @default([]) // Optional: Additional gallery images for detail page
+  badge    String? // "Bestseller", "New", "Premium"
+  popular  Boolean  @default(false)
+  featured Boolean  @default(false)
+
+  // Project Details
+  clientName     String? // Optional: who you built this for
+  completionDate DateTime? // When the project was completed
+  projectUrl     String? // Live site URL
+  githubUrl      String? // Repository URL (if public)
+
+  // Web Dev Specific
+  techStack String[] // ["Next.js", "TypeScript", "Tailwind"]
+  features  String[] // What features this project has
+
+  // Categorization
+  category     String @default("Web Development")
+  categorySlug String @default("web-development")
+
+  // Metadata
+  status    ProjectStatus @default(PUBLISHED)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  // @@index([slug])
+  @@index([categorySlug])
+  @@index([featured])
+  @@index([popular])
+  @@index([status])
+}
+
+// ============================================
+// GRAPHIC DESIGN PROJECTS
+// ============================================
+
+model GraphicDesignProject {
+  id          String @id @default(uuid()) @map("_id")
+  slug        String @unique
+  name        String
+  description String
+
+  image    String // Main thumbnail
+  images   String[] @default([]) // Optional: Additional gallery images
+  badge    String?
+  popular  Boolean  @default(false)
+  featured Boolean  @default(false)
+
+  clientName     String?
+  completionDate DateTime?
+
+  // Design Specific
+  designTools  String[] // ["Figma", "Photoshop", "Illustrator"]
+  projectType  String // "Logo Design", "Brand Identity", "Social Media"
+  colorPalette String[] // ["#FF5733", "#C70039"]
+  features     String[] // Design features/aspects
+
+  category     String @default("Graphic Design")
+  categorySlug String @default("graphic-design")
+
+  status    ProjectStatus @default(PUBLISHED)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  // @@index([slug])
+  @@index([categorySlug])
+  @@index([featured])
+}
+
+model AIAutomationProject {
+  id          String @id @default(uuid()) @map("_id")
+  slug        String @unique
+  name        String
+  description String
+
+  image    String
+  images   String[] @default([])
+  badge    String?
+  popular  Boolean  @default(false)
+  featured Boolean  @default(false)
+
+  clientName     String?
+  completionDate DateTime?
+  projectUrl     String?
+  demoUrl        String?
+
+  // AI Automation Specific
+  aiTechnologies String[] // ["GPT-4", "Claude", "Langchain", "OpenAI API"]
+  automationType String // "Workflow Automation", "Chatbot", "Data Processing"
+  integrations   String[] // ["Slack", "Gmail", "Zapier", "Make"]
+  features       String[]
+  results        String? // ROI, time saved, etc.
+
+  category     String @default("AI Automation")
+  categorySlug String @default("ai-automation")
+
+  status    ProjectStatus @default(PUBLISHED)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([categorySlug])
+  @@index([featured])
+  @@index([popular])
+  @@index([status])
+}
+
+// Mobile App Development Project Model
+model MobileAppProject {
+  id          String @id @default(uuid()) @map("_id")
+  slug        String @unique
+  name        String
+  description String
+
+  image    String
+  images   String[] @default([])
+  badge    String?
+  popular  Boolean  @default(false)
+  featured Boolean  @default(false)
+
+  clientName     String?
+  completionDate DateTime?
+  appStoreUrl    String?
+  playStoreUrl   String?
+  demoUrl        String?
+
+  // Mobile App Specific
+  platforms String[] // ["iOS", "Android", "Cross-platform"]
+  techStack String[] // ["React Native", "Flutter", "Swift", "Kotlin"]
+  appType   String // "E-commerce", "Social", "Productivity", "Gaming"
+  features  String[]
+  downloads String? // "10K+", "100K+"
+  rating    String? // "4.5/5"
+
+  category     String @default("Mobile App Development")
+  categorySlug String @default("mobile-app-development")
+
+  status    ProjectStatus @default(PUBLISHED)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([categorySlug])
+  @@index([featured])
+  @@index([popular])
+  @@index([status])
+}
+
+model PortfolioProject {
+  id String @id @default(uuid()) @map("_id")
+
+  slug        String @unique
+  name        String
+  description String
+
+  // Basic Info
+  image    String // Main thumbnail
+  images   String[] @default([]) // Gallery images
+  videoUrl String? // YouTube, Vimeo, or direct video URL
+  badge    String?
+  popular  Boolean  @default(false)
+  featured Boolean  @default(true)
+
+  // Project Details
+  clientName     String?
+  completionDate DateTime?
+  projectUrl     String?
+  githubUrl      String?
+  demoUrl        String?
+
+  // Category Info
+  category     String
+  categorySlug String
+
+  // Universal Fields
+  techStack String[] @default([])
+  features  String[] @default([])
+  tools     String[] @default([])
+  platforms String[] @default([])
+
+  // Additional Details
+  projectType String?
+  results     String?
+  duration    String?
+  metrics     String?
+
+  // Portfolio Specific
+  order        Int     @default(0)
+  showcaseText String?
+
+  // Metadata
+  status    ProjectStatus @default(PUBLISHED)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([categorySlug])
+  @@index([featured])
+  @@index([order])
+  @@index([status])
+}
+
+model VibeCodingProject {
+  id          String @id @default(uuid()) @map("_id")
+  slug        String @unique
+  name        String
+  description String
+
+  image    String
+  images   String[] @default([])
+  badge    String?
+  popular  Boolean  @default(false)
+  featured Boolean  @default(false)
+
+  clientName     String?
+  completionDate DateTime?
+  projectUrl     String? // Live demo URL
+  githubUrl      String? // Repository URL
+
+  // Vibe Coding Specific
+  aiTools   String[] // ["Cursor", "v0", "Claude", "GitHub Copilot", "Bolt.new"]
+  techStack String[] // Technologies used
+  features  String[] // What was built
+
+  category     String @default("Vibe Coding")
+  categorySlug String @default("vibe-coding")
+
+  status    ProjectStatus @default(PUBLISHED)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([categorySlug])
+  @@index([featured])
+  @@index([popular])
+  @@index([status])
+}
+
+// ============================================
+// AI AGENT BUILDING PROJECTS
+// ============================================
+
+model AIAgentBuildingProject {
+  id          String @id @default(uuid()) @map("_id")
+  slug        String @unique
+  name        String
+  description String
+
+  image    String
+  images   String[] @default([])
+  badge    String?
+  popular  Boolean  @default(false)
+  featured Boolean  @default(false)
+
+  clientName     String?
+  completionDate DateTime?
+  demoUrl        String? // Demo/playground URL
+  githubUrl      String? // Repository URL (if public)
+
+  // AI Agent Specific
+  aiModels     String[] // ["GPT-4", "Claude 3.5", "Gemini Pro"]
+  agentType    String // "Chatbot", "Automation Agent", "Research Agent", "Code Agent"
+  frameworks   String[] // ["LangChain", "CrewAI", "AutoGen", "Custom"]
+  integrations String[] // ["Slack", "Discord", "API", "Database"]
+  capabilities String[] // What the agent can do
+  techStack    String[] // Backend technologies
+  features     String[] // Agent features
+
+  category     String @default("AI Agent Building")
+  categorySlug String @default("ai-agent-building")
+
+  status    ProjectStatus @default(PUBLISHED)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([categorySlug])
+  @@index([featured])
+  @@index([popular])
+  @@index([status])
+}
