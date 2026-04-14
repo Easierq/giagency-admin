@@ -16,7 +16,7 @@ import type { Metadata } from "next";
 import ToastContainer from "@/components/ui/ToastContainer";
 
 export const metadata: Metadata = {
-  title: "iBetaAgency Admin",
+  title: "GiAgency Admin",
   description: "Admin page",
 };
 

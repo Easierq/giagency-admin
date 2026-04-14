@@ -366,25 +366,29 @@ export default async function AdminDashboard() {
       label: "Total Projects",
       value: totalProjects.toString(),
       icon: BarChart3,
-      color: "text-cyan-600",
+      color: "text-cyan-700",
+      bg: "bg-cyan-100",
     },
     {
       label: "Published",
       value: totalPublished.toString(),
       icon: Eye,
-      color: "text-green-600",
+      color: "text-green-700",
+      bg: "bg-green-100",
     },
     {
       label: "Featured",
       value: featuredCount.toString(),
       icon: Star,
-      color: "text-yellow-500",
+      color: "text-pink-700",
+      bg: "bg-pink-100",
     },
     {
       label: "Draft",
       value: totalDraft.toString(),
       icon: FileText,
-      color: "text-gray-600",
+      color: "text-purple-700",
+      bg: "bg-purple-100",
     },
   ];
 
@@ -452,7 +456,7 @@ export default async function AdminDashboard() {
   // UI
   // ============================
   return (
-    <div className="min-h-screen bg-green-50/50">
+    <div className="min-h-screen bg-green-50/30">
       <div className="container mx-auto px-[3%] lg:px-[7%] py-8">
         {/* Header */}
         <div className="mb-8">
@@ -467,19 +471,20 @@ export default async function AdminDashboard() {
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <Card key={index}>
-                <CardContent className="p-6">
+              <div
+                className={`${stat.bg} shadow-none border-none ${stat.color} rounded-lg`}
+                key={index}
+              >
+                <div className={`p-6`}>
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-                      <p className="text-3xl font-bold text-gray-900">
-                        {stat.value}
-                      </p>
+                      <p className="text-sm mb-1">{stat.label}</p>
+                      <p className="text-3xl font-bold">{stat.value}</p>
                     </div>
-                    <Icon className={`w-12 h-12 ${stat.color}`} />
+                    <Icon className={`w-12 h-12`} />
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             );
           })}
         </div>
